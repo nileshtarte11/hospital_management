@@ -23,7 +23,7 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
     let userData = req.body;
-    User.findOne({ email: userData.email }, (error, user) => {
+    User.findOne({ email: userData.userName }, (error, user) => {
 
         if (error) {
             console.log(error);
@@ -36,7 +36,7 @@ router.post('/login', (req, res) => {
                 res.status(401).send('Invalid Password');
             }
             else {
-                let payload = { subject: user._id }
+                let payload = { id: user._id, role: user.role }
                 let token = jwt.sign(payload, 'secretKey')
 
                 res.status(200).send({ token, user });

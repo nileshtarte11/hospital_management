@@ -9,7 +9,9 @@ const app = express();
 const login_register = require('./routes/api')
 
 app.use(bodyParser.json());
-app.use(cors())
+
+app.use(cors());
+
 
 app.use('/', login_register);
 
