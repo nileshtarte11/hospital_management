@@ -65,3 +65,18 @@ exports.verifiedUser = (req, res) => {
         }
     })
 }
+
+
+exports.userProfile = (req, res) => {
+    adminService.userProfile(req, function (err, user) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            return res.status(200).json({
+                status: 200,
+                user: user,
+            })
+        }
+    })
+}
