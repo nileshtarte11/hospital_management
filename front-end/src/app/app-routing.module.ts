@@ -1,3 +1,4 @@
+import { RegisterComponent } from './components/common/register/register.component';
 import { PatientDashboardComponent } from './components/Patient/patient-dashboard/patient-dashboard.component';
 import { DoctorDashboardComponent } from './components/Doctor/doctor-dashboard/doctor-dashboard.component';
 import { RoleGuardService } from './AuthGuard/role-guard.service';
@@ -6,10 +7,16 @@ import { LoginComponent } from './components/common/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'admin-dashboard',

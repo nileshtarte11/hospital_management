@@ -1,0 +1,51 @@
+<div class="login-page">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Hospital Management</h3>
+                </div>
+                <div class="card-body">
+                    <form class="m-4" [formGroup]="registrationForm">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" name="firstName" formControlName="firstName">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" name="lastName" formControlName="lastName">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email" formControlName="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input type="text" class="form-control" name="mobileNumber" formControlName="mobileNumber">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="text" class="form-control" name="password" formControlName="password">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control" name="role" formControlName="role">
+                                <option selected disabled value="null">Select Role</option>
+                                <option value="DOCTOR">Doctor</option>
+                                <option value="PATIENT">Patient</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="form-control btn btn-outline-primary" (click)="register()">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
