@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector, ActionReducerMap, } from '@ngrx/store';
 
-import * as fromListProfile from './components/common/login/reducer/list-profile.reducer';
+import * as fromListProfile from './components/common/profile/reducer/list-profile.reducer';
 
 
 export interface State {

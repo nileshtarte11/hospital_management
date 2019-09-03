@@ -6,18 +6,13 @@ import { environment } from './../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-
-  private loginUrl = "login";
+export class ProfileService {
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  login(data) {
-    return this.http.post(environment.backendUrl + this.loginUrl, data);
+  getProfilesList(id) {
+    return this.http.get(`http://localhost:3000/admin/userProfile/${id}`);
   }
-
-  
-
 }

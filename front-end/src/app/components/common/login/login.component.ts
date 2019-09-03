@@ -7,7 +7,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as fromRoot from './../../../index-reducer';
 import { Store } from '@ngrx/store';
-import * as ListProfileActions from './actions/list-profile.actions';
+import * as ListProfileActions from '../profile/actions/list-profile.actions';
 
 
 @Component({
@@ -21,11 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
 
-  obsListProfile: Observable<any>;
-  subListProfile: Subscription;
 
-  obsListProfileErr: Observable<any>;
-  subListProfileErr: Subscription;
 
 
   constructor(
@@ -39,28 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', Validators.required]
     })
 
-    this.obsListProfile = this._store.select(fromRoot.selectListProfileSuccess);
-    this.obsListProfileErr = this._store.select(fromRoot.selectListProfileFailure);
   }
 
   ngOnInit() {
-    let isOnInit = true;
-    this._store.dispatch(new ListProfileActions.ListProfile());
-
-    this.subListProfile = this.obsListProfile.subscribe(res => {
-      if (res && !isOnInit) {
-        console.log(res.swapInfo);
-      }
-    })
-
-    this.subListProfileErr = this.obsListProfileErr.subscribe(err => {
-      if (err && !isOnInit) {
-        alert('false');
-        console.log('error => ' + err)
-      }
-    })
-
-    isOnInit = false;
   }
 
 
@@ -70,10 +47,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       let obj = this.loginForm.value;
       this.loginService.login(obj).subscribe(result => {
         if (result) {
+          //  this._store.dispatch(new ListProfileActions.ListProfile());
           localStorage.setItem('token', result['token']);
-          alert('login success')
-          // this.loginDetails = result['user'];
-          // localStorage.setItem('username', this.loginDetails[0]['userName']);
+
+          this.loginDetails = result['user'];
+          localStorage.setItem('_id', this.loginDetails['_id']);
 
           if (result['user']['role'] == 'ADMIN')
             this.router.navigate(['/admin-dashboard']);
@@ -97,8 +75,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    if (this.subListProfile) this.subListProfile.unsubscribe();
-    if (this.subListProfileErr) this.subListProfileErr.unsubscribe();
   }
 
 }

@@ -1,5 +1,5 @@
 import { ActionReducer, Action } from '@ngrx/store';
-import * as ListProfileActions from './../actions/list-profile.actions';
+import * as ListProfileActions from '../actions/list-profile.actions';
 
 
 export interface State {

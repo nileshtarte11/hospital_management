@@ -1,3 +1,4 @@
+import { ProfileService } from './services/common/profile.service';
 import { reducers } from './index-reducer';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginEffects } from './components/common/login/login.effects';
@@ -17,6 +18,8 @@ import { PatientDashboardComponent } from './components/Patient/patient-dashboar
 import { RegisterComponent } from './components/common/register/register.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { ProfileComponent } from './components/common/profile/profile.component';
+import { ProfileEffects } from './components/common/profile/profile.effects';
 
 @NgModule({
   declarations: [
@@ -25,22 +28,21 @@ import { StoreModule } from '@ngrx/store';
     AdminDashboardComponent,
     DoctorDashboardComponent,
     PatientDashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
 
   ],
   imports: [
     BrowserModule,
-    //RouterModule.forRoot(Routes),
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([LoginEffects]),
-    // EffectsModule.forFeature([]),
-
+    EffectsModule.forRoot([ProfileEffects, LoginEffects]),
   ],
-  providers: [LoginService, RoleGuardService],
+  providers: [
+    LoginService, RoleGuardService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

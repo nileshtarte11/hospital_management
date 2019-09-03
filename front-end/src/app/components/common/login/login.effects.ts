@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { switchMap } from 'rxjs/operators';
 
-import * as ListProfileActions from './actions/list-profile.actions';
+import * as ListProfileActions from '../profile/actions/list-profile.actions';
 
 
 @Injectable()
@@ -18,18 +18,16 @@ export class LoginEffects {
         private loginService: LoginService
     ) { }
 
+    // @Effect()
+    // listProfile$ = this.actions$.pipe(ofType<ListProfileActions.ListProfile>(ListProfileActions.LISTPROFILE),
+    //     map((action: ListProfileActions.ListProfile) => action),
 
-
-    @Effect()
-    listProfile$ = this.actions$.pipe(ofType<ListProfileActions.ListProfile>(ListProfileActions.LISTPROFILE),
-        map((action: ListProfileActions.ListProfile) => action),
-
-        exhaustMap(() =>
-            this.loginService.getProfilesList()
-                .pipe(
-                    map(result => new ListProfileActions.ListProfileSuccess(result)),
-                    catchError(error => of(new ListProfileActions.ListProfileFailure(error)))
-                )
-        )
-    );
+    //     exhaustMap(() =>
+    //         this.loginService.getProfilesList()
+    //             .pipe(
+    //                 map(result => new ListProfileActions.ListProfileSuccess(result)),
+    //                 catchError(error => of(new ListProfileActions.ListProfileFailure(error)))
+    //             )
+    //     )
+    // );
 }

@@ -7,7 +7,7 @@ export const LISTPROFILE_FAILURE = 'LIST PROFILE FAILURE';
 
 export class ListProfile {
     readonly type = LISTPROFILE;
-    constructor() {
+    constructor(public id: any) {
 
     }
 }

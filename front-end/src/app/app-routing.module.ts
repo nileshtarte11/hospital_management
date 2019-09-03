@@ -1,3 +1,4 @@
+import { ProfileComponent } from './components/common/profile/profile.component';
 import { RegisterComponent } from './components/common/register/register.component';
 import { PatientDashboardComponent } from './components/Patient/patient-dashboard/patient-dashboard.component';
 import { DoctorDashboardComponent } from './components/Doctor/doctor-dashboard/doctor-dashboard.component';
@@ -41,6 +42,10 @@ const routes: Routes = [
     data: {
       expectedRole: 'PATIENT'
     }
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   },
 ];
 
