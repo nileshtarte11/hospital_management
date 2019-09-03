@@ -1,3 +1,6 @@
+import { reducers } from './index-reducer';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginEffects } from './components/common/login/login.effects';
 import { RoleGuardService } from './AuthGuard/role-guard.service';
 import { LoginService } from './services/common/login.service';
 import { LoginComponent } from './components/common/login/login.component';
@@ -12,6 +15,8 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 import { DoctorDashboardComponent } from './components/Doctor/doctor-dashboard/doctor-dashboard.component';
 import { PatientDashboardComponent } from './components/Patient/patient-dashboard/patient-dashboard.component';
 import { RegisterComponent } from './components/common/register/register.component';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -21,13 +26,19 @@ import { RegisterComponent } from './components/common/register/register.compone
     DoctorDashboardComponent,
     PatientDashboardComponent,
     RegisterComponent
+
   ],
   imports: [
     BrowserModule,
+    //RouterModule.forRoot(Routes),
     AppRoutingModule,
+    StoreModule.forRoot(reducers),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    EffectsModule.forRoot([LoginEffects]),
+    // EffectsModule.forFeature([]),
+
   ],
   providers: [LoginService, RoleGuardService],
   bootstrap: [AppComponent]

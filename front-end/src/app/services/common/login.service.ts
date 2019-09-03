@@ -18,4 +18,8 @@ export class LoginService {
     return this.http.post(environment.backendUrl + this.loginUrl, data);
   }
 
+  getProfilesList() {
+    return this.http.get('http://www.mocky.io/v2/5d6e08003200005000a8a517');
+  }
+
 }

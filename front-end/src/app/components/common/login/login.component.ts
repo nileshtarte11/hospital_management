@@ -1,31 +1,66 @@
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+
 import { Router } from '@angular/router';
 import { LoginService } from './../../../services/common/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as fromRoot from './../../../index-reducer';
+import { Store } from '@ngrx/store';
+import * as ListProfileActions from './actions/list-profile.actions';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginDetails: any;
 
   loginForm: FormGroup;
 
+  obsListProfile: Observable<any>;
+  subListProfile: Subscription;
+
+  obsListProfileErr: Observable<any>;
+  subListProfileErr: Subscription;
+
+
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
+    private _store: Store<fromRoot.State>
   ) {
     this.loginForm = this.formBuilder.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
     })
+
+    this.obsListProfile = this._store.select(fromRoot.selectListProfileSuccess);
+    this.obsListProfileErr = this._store.select(fromRoot.selectListProfileFailure);
   }
 
   ngOnInit() {
+    let isOnInit = true;
+    this._store.dispatch(new ListProfileActions.ListProfile());
+
+    this.subListProfile = this.obsListProfile.subscribe(res => {
+      if (res && !isOnInit) {
+        console.log(res.swapInfo);
+      }
+    })
+
+    this.subListProfileErr = this.obsListProfileErr.subscribe(err => {
+      if (err && !isOnInit) {
+        alert('false');
+        console.log('error => ' + err)
+      }
+    })
+
+    isOnInit = false;
   }
 
 
@@ -58,6 +93,12 @@ export class LoginComponent implements OnInit {
       )
     }
 
+  }
+
+
+  ngOnDestroy() {
+    if (this.subListProfile) this.subListProfile.unsubscribe();
+    if (this.subListProfileErr) this.subListProfileErr.unsubscribe();
   }
 
 }
