@@ -1,3 +1,5 @@
+import { AdminPatientComponent } from './components/admin/admin-patient/admin-patient.component';
+import { AdminDoctorComponent } from './components/admin/admin-doctor/admin-doctor.component';
 import { ProfileComponent } from './components/common/profile/profile.component';
 import { RegisterComponent } from './components/common/register/register.component';
 import { PatientDashboardComponent } from './components/Patient/patient-dashboard/patient-dashboard.component';
@@ -22,6 +24,22 @@ const routes: Routes = [
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ADMIN'
+    }
+  },
+  {
+    path: 'admin-doctor',
+    component: AdminDoctorComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'ADMIN'
+    }
+  },
+  {
+    path: 'admin-patient',
+    component: AdminPatientComponent,
     canActivate: [RoleGuardService],
     data: {
       expectedRole: 'ADMIN'

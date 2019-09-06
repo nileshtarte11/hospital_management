@@ -13,6 +13,8 @@ import * as  ListProfileActions from './actions/list-profile.actions';
 
 export class ProfileComponent implements OnInit, OnDestroy {
 
+  userDetails: any;
+
   obsListProfile: Observable<any>;
   subListProfile: Subscription;
 
@@ -37,14 +39,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.subListProfile = this.obsListProfile.subscribe(res => {
       if (res && !isOnInit) {
+        this.userDetails = res.user;
         console.log(res.user);
       }
     })
 
     this.subListProfileErr = this.obsListProfileErr.subscribe(err => {
       if (err && !isOnInit) {
-        alert('false');
-        console.log('error => ' + err)
+        console.log(err)
       }
     })
 

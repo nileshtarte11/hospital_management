@@ -1,3 +1,4 @@
+import { AdminService } from './services/admin/admin.service';
 import { ProfileService } from './services/common/profile.service';
 import { reducers } from './index-reducer';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,6 +21,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ProfileComponent } from './components/common/profile/profile.component';
 import { ProfileEffects } from './components/common/profile/profile.effects';
+import { AdminPatientComponent } from './components/admin/admin-patient/admin-patient.component';
+import { AdminDoctorComponent } from './components/admin/admin-doctor/admin-doctor.component';
+import { AdminHeaderComponent } from './components/admin/admin-header/admin-header.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { ProfileEffects } from './components/common/profile/profile.effects';
     DoctorDashboardComponent,
     PatientDashboardComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminPatientComponent,
+    AdminDoctorComponent,
+    AdminHeaderComponent
 
   ],
   imports: [
@@ -42,7 +49,7 @@ import { ProfileEffects } from './components/common/profile/profile.effects';
     EffectsModule.forRoot([ProfileEffects, LoginEffects]),
   ],
   providers: [
-    LoginService, RoleGuardService, ProfileService],
+    LoginService, RoleGuardService, ProfileService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.valid) {
       let obj = this.registrationForm.value;
       obj['isVerified'] = 'N';
+      obj['status'] = 'ACTIVE';
       this.registerService.register(obj).subscribe(result => {
         if (result) {
           console.log(result);
