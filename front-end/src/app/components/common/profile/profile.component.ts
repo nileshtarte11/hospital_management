@@ -6,7 +6,7 @@ import * as fromRoot from './../../../index-reducer';
 import * as  ListProfileActions from './actions/list-profile.actions';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -33,9 +33,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     let isOnInit = true;
 
-    let id = localStorage.getItem('_id');
+    //let id = localStorage.getItem('_id');
 
-    this._store.dispatch(new ListProfileActions.ListProfile(id));
+    // this._store.dispatch(new ListProfileActions.ListProfile(id));
 
     this.subListProfile = this.obsListProfile.subscribe(res => {
       if (res && !isOnInit) {

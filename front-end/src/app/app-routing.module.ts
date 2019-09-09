@@ -61,10 +61,10 @@ const routes: Routes = [
       expectedRole: 'PATIENT'
     }
   },
-  {
-    path: 'profile',
-    component: ProfileComponent
-  },
+  // {
+  //   path: 'profile',
+  //   component: ProfileComponent
+  // },
 ];
 
 @NgModule({

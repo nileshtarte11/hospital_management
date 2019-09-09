@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('token', result['token']);
 
           this.loginDetails = result['user'];
-          localStorage.setItem('_id', this.loginDetails['_id']);
+          localStorage.setItem('id', this.loginDetails['_id']);
+          localStorage.setItem('role', this.loginDetails['role']);
+
 
           if (result['user']['role'] == 'ADMIN')
             this.router.navigate(['/admin-dashboard']);

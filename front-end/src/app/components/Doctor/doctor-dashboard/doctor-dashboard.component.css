@@ -1,0 +1,7 @@
+.actions{
+    display: inline-block;
+}
+
+.modal-dialog {
+    max-width: 750px !important;
+}
