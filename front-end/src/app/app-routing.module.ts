@@ -9,6 +9,7 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 import { LoginComponent } from './components/common/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { VisitedPatientComponent } from './components/doctor/visited-patient/visited-patient.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,14 @@ const routes: Routes = [
   {
     path: 'doctor-dashboard',
     component: DoctorDashboardComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'DOCTOR'
+    }
+  },
+  {
+    path: 'visited-patient/:id',
+    component: VisitedPatientComponent,
     canActivate: [RoleGuardService],
     data: {
       expectedRole: 'DOCTOR'

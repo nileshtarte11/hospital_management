@@ -32,4 +32,9 @@ export class HeaderComponent implements OnInit {
     this._store.dispatch(new ListProfileActions.ListProfile(this.id));
   }
 
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
 }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DoctorService } from './../../../services/doctor/doctor.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,8 @@ export class DoctorDashboardComponent implements OnInit {
 
   constructor(
     public doctorService: DoctorService,
-    private _store: Store<fromRoot.State>
+    private _store: Store<fromRoot.State>,
+    private router: Router,
   ) {
     this.id = localStorage.getItem('id');
   }
@@ -54,6 +56,10 @@ export class DoctorDashboardComponent implements OnInit {
 
   viewProfile(id) {
     this._store.dispatch(new ListProfileActions.ListProfile(id));
+  }
+
+  sendDoctorId() {
+    this.router.navigate(['visited-patient', this.id])
   }
 
 }

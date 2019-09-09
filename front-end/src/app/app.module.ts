@@ -25,6 +25,8 @@ import { AdminPatientComponent } from './components/admin/admin-patient/admin-pa
 import { AdminDoctorComponent } from './components/admin/admin-doctor/admin-doctor.component';
 import { AdminHeaderComponent } from './components/admin/admin-header/admin-header.component';
 import { HeaderComponent } from './components/common/header/header.component';
+import { VisitedPatientComponent } from './components/doctor/visited-patient/visited-patient.component';
+import { FooterComponent } from './components/common/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { HeaderComponent } from './components/common/header/header.component';
     AdminPatientComponent,
     AdminDoctorComponent,
     AdminHeaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    VisitedPatientComponent,
+    FooterComponent
 
   ],
   imports: [

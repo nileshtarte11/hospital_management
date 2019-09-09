@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.subListProfile = this.obsListProfile.subscribe(res => {
       if (res && !isOnInit) {
         this.userDetails = res.user;
-        console.log(res.user);
       }
     })
 

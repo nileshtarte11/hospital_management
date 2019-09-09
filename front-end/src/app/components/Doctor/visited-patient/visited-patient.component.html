@@ -1,11 +1,10 @@
 <application-header></application-header>
+
 <div class="row">
     <div class="col-12 col-sm-12 col-md-9 com-lg-9 mx-auto">
         <div class="pt-3 pb-3">
-            <h2 class="inline-block ">List Appointment</h2>
-            <div class="inline-block float-right">
-                <button class="btn btn-info " (click)="sendDoctorId()"> Visited Patient List</button>
-            </div>
+            <i class="fa fa-caret-square-o-left" style="font-size: 32px" [routerLink]="['/doctor-dashboard']"></i>
+            <h2 class="inline-block pl-3">List Visited Patient</h2>
         </div>
     </div>
 </div>
@@ -22,19 +21,17 @@
                             <th>Lastname</th>
                             <th>Email</th>
                             <th>Mobile Number</th>
-                            <th>Status</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let appointment of appointments">
-                            <td>{{appointment?.date | date}}</td>
-                            <td>{{appointment?.user.firstName}}</td>
-                            <td>{{appointment?.user.lastName}}</td>
-                            <td>{{appointment?.user.email}}</td>
-                            <td>{{appointment?.user.mobileNumber}}</td>
-                            <td>{{appointment?.status}}</td>
-                            <td>
+                        <tr *ngFor="let parient of visitedPatients">
+                            <td>{{parient?.date | date}}</td>
+                            <td>{{parient?.user?.firstName}}</td>
+                            <td>{{parient?.user?.lastName}}</td>
+                            <td>{{parient?.user?.email}}</td>
+                            <td>{{parient?.user?.mobileNumber}}</td>
+
+                            <!-- <td>
                                 <div class="actions">
                                     <a *ngIf="appointment.status == 'PENDING' || appointment.status == 'REJECTED' "
                                         href="javascript:void(0)" (click)="updateStatus(appointment._id, 'ACCEPTED')">
@@ -49,32 +46,10 @@
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<!-- The Modal -->
-<div class="modal" id="patientProfile">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Patient Profile</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <profile></profile>
             </div>
         </div>
     </div>

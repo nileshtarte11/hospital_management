@@ -11,6 +11,7 @@ export class DoctorService {
 
   private getAppointmentUrl = 'doctor/getAppointment/';
   private updateStatusUrl = 'doctor/updateStatus';
+  private listVisitedPatientUrl = 'doctor/visitedPatient/'
 
 
   constructor(
@@ -22,7 +23,11 @@ export class DoctorService {
   }
 
   updateStatus(obj) {
-    return this.http.put(environment.backendUrl + this.updateStatusUrl, obj)
+    return this.http.put(environment.backendUrl + this.updateStatusUrl, obj);
+  }
+
+  listVisitedPatient(id) {
+    return this.http.get(environment.backendUrl + this.listVisitedPatientUrl + id);
   }
 
 }
