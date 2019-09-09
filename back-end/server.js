@@ -18,6 +18,7 @@ app.use(cors());
 
 app.use('/', login_register);
 app.use('/admin', admin);
+app.use('/doctor', doctor);
 app.use('/patient', patient);
 
 

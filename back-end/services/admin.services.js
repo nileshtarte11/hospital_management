@@ -58,7 +58,7 @@ exports.verifiedUser = function (req, callback) {
 
 exports.userProfile = function (req, callback) {
     let user = req.params.id;
-    User.find({ _id: { $in: req.params.id } }, function (err, user) {
+    User.findOne({ _id: { $in: req.params.id } }, function (err, user) {
         if (err) {
             return callback(err, null);
         }

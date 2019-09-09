@@ -9,7 +9,8 @@ const userSchema = new Schema({
     mobileNumber: Number,
     role: String,
     password: String,
-    isVerified: String
+    isVerified: String,
+    status: String
 });
 
 module.exports = mongoose.model('user', userSchema, 'users');
