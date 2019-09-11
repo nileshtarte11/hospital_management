@@ -7,6 +7,7 @@ const Appointment = require('../model/appointments');
 
 const db = require('../config');
 
+router.get('/getDoctors', patientControllers.getDoctors);
 router.post('/bookAppintment', patientControllers.bookAppintment);
 router.get('/getAppintment/:id', patientControllers.getAppintment);
 router.put('/cancelAppintment', patientControllers.cancelAppintment);

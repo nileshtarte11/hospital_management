@@ -2,6 +2,19 @@ const express = require('express');
 const db = require('../config');
 const { ObjectId } = require('mongodb');
 const Appointment = require('../model/appointments');
+const Users = require('../model/user');
+
+exports.getDoctors = function (req, callback) {
+    Users.find({ role: 'DOCTOR', isVerified: "Y" }, function (err, users) {
+        if (err) {
+            return callback(err, null);
+        }
+        else {
+            return callback(null, users);
+        }
+    })
+}
+
 
 exports.bookAppintment = function (req, callback) {
     let appointment = new Appointment(req.body)
