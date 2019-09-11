@@ -1,3 +1,4 @@
+import { ListAppointmentComponent } from './components/patient/list-appointment/list-appointment.component';
 import { AdminPatientComponent } from './components/admin/admin-patient/admin-patient.component';
 import { AdminDoctorComponent } from './components/admin/admin-doctor/admin-doctor.component';
 import { ProfileComponent } from './components/common/profile/profile.component';
@@ -70,6 +71,14 @@ const routes: Routes = [
       expectedRole: 'PATIENT'
     }
   },
+  {
+    path: 'list-appointment',
+    component: ListAppointmentComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'PATIENT'
+    }
+  }
   // {
   //   path: 'profile',
   //   component: ProfileComponent

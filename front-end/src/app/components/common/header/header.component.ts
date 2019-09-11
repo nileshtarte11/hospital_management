@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
   }
 
   viewProfile() {
-    console.log('sdds', this.id)
     this._store.dispatch(new ListProfileActions.ListProfile(this.id));
   }
 

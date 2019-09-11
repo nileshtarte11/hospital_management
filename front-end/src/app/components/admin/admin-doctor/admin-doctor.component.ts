@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from './../../../services//admin/admin.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-admin-doctor',
@@ -34,35 +35,56 @@ export class AdminDoctorComponent implements OnInit {
   }
 
   deleteDoctor(id) {
-    this.adminService.deleteDoctor(id).subscribe(res => {
-      if (res) {
-        alert('Doctor Deleted successfully');
-        let index = this.doctors.findIndex(obj => obj['_id'] == res['user']['_id']);
-        if (index !== -1) {
-          this.doctors.splice(index, 1);
-        }
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
+    swal({
+      title: "Are you sure?",
+      text: "Are you sure that you want to delete this doctor?",
+      icon: "warning",
+      dangerMode: true,
     })
+      .then(willDelete => {
+        if (willDelete) {
+          this.adminService.deleteDoctor(id).subscribe(res => {
+            if (res) {
+              swal("", "Doctor has been deleted!", "success");
+              let index = this.doctors.findIndex(obj => obj['_id'] == res['user']['_id']);
+              if (index !== -1) {
+                this.doctors.splice(index, 1);
+              }
+            }
+          }, err => {
+            if (err) {
+              console.log(err);
+            }
+          })
+        }
+      });
   }
+
 
   verifyDoctor(id) {
-    let obj = { _id: id, isVerified: 'Y' };
-    this.adminService.verifyUser(obj).subscribe(res => {
-      if (res) {
-        alert('Doctor Verified successfully')
-        let index = this.doctors.findIndex(obj => obj['_id'] == res['user']['_id']);
 
-        if (index !== -1) {
-          this.doctors[index] = res['user'];
-        }
-      }
-    }, err => {
-      console.log(err);
+    swal({
+      title: "Are you sure?",
+      text: "Are you sure that you want to update status as verified?",
+      icon: "warning",
+      dangerMode: true,
     })
-  }
+      .then(willDelete => {
+        if (willDelete) {
+          let obj = { _id: id, isVerified: 'Y' };
+          this.adminService.verifyUser(obj).subscribe(res => {
+            if (res) {
+              swal("", "Doctor Verified successfully", "success");
+              let index = this.doctors.findIndex(obj => obj['_id'] == res['user']['_id']);
 
+              if (index !== -1) {
+                this.doctors[index] = res['user'];
+              }
+            }
+          }, err => {
+            console.log(err);
+          })
+        }
+      });
+  }
 }
