@@ -52,10 +52,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Book Appointment</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" id="closeAppointmentModalBtn" #closeAppointmentModalBtn class="close"
+                    data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <book-appointment [doctorDetails]="doctorDetails"></book-appointment>
+                <book-appointment [doctorDetails]="doctorDetails" (onAppointmentBook)="closeAppointmentModal($event)">
+                </book-appointment>
             </div>
         </div>
     </div>

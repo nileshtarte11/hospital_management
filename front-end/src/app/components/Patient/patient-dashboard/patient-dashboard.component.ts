@@ -1,8 +1,9 @@
 import { Store } from '@ngrx/store';
 import { PatientService } from './../../../services/patient/patient.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import * as ListProfileActions from './../../common/profile/actions/list-profile.actions';
 import * as fromRoot from './../../../index-reducer';
+import { ViewChild } from '@angular/core'
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -10,6 +11,8 @@ import * as fromRoot from './../../../index-reducer';
   styleUrls: ['./patient-dashboard.component.css']
 })
 export class PatientDashboardComponent implements OnInit {
+
+  // @ViewChild('closeAppointmentModalBtn') closeAppointmentModalBtn: ElementRef;
 
   doctors = [];
 
@@ -47,5 +50,11 @@ export class PatientDashboardComponent implements OnInit {
   getDoctorDetails(doctor) {
     this.doctorDetails = doctor;
   }
+
+  closeAppointmentModal() {
+    alert('testing');
+    //this.closeAppointmentModalBtn.nativeElement().click();
+  }
+
 
 }

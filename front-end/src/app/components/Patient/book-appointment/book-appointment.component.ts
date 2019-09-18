@@ -1,10 +1,11 @@
 import { PatientService } from './../../../services/patient/patient.service';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
 import swal from 'sweetalert';
 import * as fromRoot from './../../../index-reducer';
 import * as ListProfileActions from './../../common/profile/actions/list-profile.actions';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'book-appointment',
@@ -14,6 +15,8 @@ import * as ListProfileActions from './../../common/profile/actions/list-profile
 export class BookAppointmentComponent implements OnInit, OnDestroy {
 
   @Input() doctorDetails;
+  @Output() onAppointmentBook: EventEmitter<any> = new EventEmitter<any>();
+
   appointmentDate: Date;
   userDetails: any;
 
@@ -71,6 +74,7 @@ export class BookAppointmentComponent implements OnInit, OnDestroy {
 
       this.patientService.bookAppintment(obj).subscribe(res => {
         if (res) {
+          this.onAppointmentBook.emit();
           swal("", "Appointment book successfully", "success");
         }
       }, err => {
