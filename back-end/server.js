@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
 const PORT = 3000;
 
@@ -16,10 +17,33 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
+function verifyToken(req, res, next) {
+    if (!req.headers.authorization) {
+        return res.status(401).send('Unauthorized request')
+    }
+
+    let token = req.headers.authorization.split(' ')[1];
+
+    if (token === 'null') {
+        return res.status(401).send('Unauthorized request')
+    }
+
+    let payload = jwt.verify(token, 'secretKey')
+
+    if (!payload) {
+        return res.status(401).send('Unauthorized request')
+    }
+
+    req.payload = payload.subject
+    next()
+}
+
+
+
 app.use('/', login_register);
-app.use('/admin', admin);
-app.use('/doctor', doctor);
-app.use('/patient', patient);
+app.use('/admin', verifyToken, admin);
+app.use('/doctor', verifyToken, doctor);
+app.use('/patient', verifyToken, patient);
 
 
 app.listen(PORT, function () {
