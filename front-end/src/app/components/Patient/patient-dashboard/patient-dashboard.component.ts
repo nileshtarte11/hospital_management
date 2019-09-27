@@ -12,7 +12,7 @@ import { ViewChild } from '@angular/core'
 })
 export class PatientDashboardComponent implements OnInit {
 
-  // @ViewChild('closeAppointmentModalBtn') closeAppointmentModalBtn: ElementRef;
+  //@ViewChild('closeAppointmentModalBtn') closeAppointmentModalBtn: ElementRef;
 
   doctors = [];
 

@@ -1,5 +1,3 @@
-import { AdminService } from './services/admin/admin.service';
-import { ProfileService } from './services/common/profile.service';
 import { reducers } from './index-reducer';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginEffects } from './components/common/login/login.effects';
@@ -11,7 +9,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { DoctorDashboardComponent } from './components/Doctor/doctor-dashboard/doctor-dashboard.component';
@@ -29,6 +27,10 @@ import { VisitedPatientComponent } from './components/doctor/visited-patient/vis
 import { FooterComponent } from './components/common/footer/footer.component';
 import { ListAppointmentComponent } from './components/patient/list-appointment/list-appointment.component';
 import { BookAppointmentComponent } from './components/patient/book-appointment/book-appointment.component';
+
+import { TokenInterceptorService } from './interceptor/token-interceptor.service';
+import { AdminService } from './services/admin/admin.service';
+import { ProfileService } from './services/common/profile.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,13 @@ import { BookAppointmentComponent } from './components/patient/book-appointment/
     EffectsModule.forRoot([ProfileEffects, LoginEffects]),
   ],
   providers: [
-    LoginService, RoleGuardService, ProfileService, AdminService],
+    LoginService, RoleGuardService, ProfileService, AdminService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
