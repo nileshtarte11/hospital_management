@@ -29,28 +29,46 @@ exports.bookAppintment = function (req, callback) {
 }
 
 
-exports.getAppintment = function (req, callback) {
-    Appointment.find({ 'user._id': req.params.id }, function (err, appointment) {
-        if (err) {
-            return callback(err, null);
-        }
-        else {
-            return callback(null, appointment);
-        }
-    })
-}
+// exports.getAppintment = function (req, callback) {
+//     Appointment.find({ 'user._id': req.params.id }, function (err, appointment) {
+//         if (err) {
+//             return callback(err, null);
+//         }
+//         else {
+//             return callback(null, appointment);
+//         }
+//     })
+// }
 
 
-exports.cancelAppintment = function (req, callback) {
-    Appointment.findByIdAndUpdate(req.body._id, { $set: { status: req.body.status } }, { new: true, useFindAndModify: false }, function (err, appointment) {
-        if (err) {
-            return callback(err, null);
-        }
-        else {
-            return callback(null, appointment);
-        }
-    })
-}
+module.exports = {
+    getAppintment: function (req, callback) {
+        Appointment.find({
+            'user._id': req.params.id
+        }).populate('doctorId')
+            .exec(function (err, appointment) {
+                if (!err) {
+                    return callback(null, appointment)
+                }
+                return callback(err, null);
+            });
+    }
+},
+
+
+
+
+
+    exports.cancelAppintment = function (req, callback) {
+        Appointment.findByIdAndUpdate(req.body._id, { $set: { status: req.body.status } }, { new: true, useFindAndModify: false }, function (err, appointment) {
+            if (err) {
+                return callback(err, null);
+            }
+            else {
+                return callback(null, appointment);
+            }
+        })
+    }
 
 exports.updateAppointment = function (req, callback) {
     Appointment.findByIdAndUpdate(req.body._id, { $set: req.body }, { new: true, useFindAndModify: false }, function (err, appointment) {

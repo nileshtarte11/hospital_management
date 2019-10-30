@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
-const db = "mongodb+srv://root:root@cluster0-npkn9.mongodb.net/hospital_management?retryWrites=true&w=majority";
 
+// Localhost Url
+const db = "mongodb://localhost:27017/hospital_management"
+
+// Atlas Url
+//const db = "mongodb+srv://root:root@cluster0-npkn9.mongodb.net/hospital_management?retryWrites=true&w=majority";
+
+// Old Url
 // const db = "mongodb+srv://root:root@cluster0-npkn9.mongodb.net/test?retryWrites=true&w=majority";
 
 
